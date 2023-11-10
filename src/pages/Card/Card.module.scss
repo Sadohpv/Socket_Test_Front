@@ -1,0 +1,90 @@
+.card {
+  width: 350px;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  .pic {
+    width: 210px;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    object-fit: cover;
+    background-color: white;
+
+    img {
+      width: 100%;
+      // height:100%;
+      // height: 210px;
+      object-fit: contain;
+    }
+  }
+  .infor {
+    flex: 1;
+    padding: 10px 10px 10px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: white;
+    text-shadow: 1px 1px 2px #000000;
+    font-weight: 700;
+
+    .name{
+        color: white;
+        font-size: 20px;
+        font-weight: 700;
+        
+        position: relative;
+        &::before{
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 1px;
+            background-color: white;
+            bottom: 0;
+        }
+    }
+    .each {
+      display: flex;
+      font-size: 16px;
+
+      align-items: center;
+      justify-content: flex-start;
+      text-align: start;
+      
+      margin-top: 8px;
+      span{
+        margin-left: 10px;
+      }
+    }
+    .long{
+      flex-direction: column;
+      justify-content: center;
+      text-align: start;
+      align-items: flex-start;
+    }
+  }
+}
+.button{
+  margin-top: 80px;
+  width:100%;
+  height: 40px;
+  border-radius: 8px;
+  background-color: aqua;
+  box-shadow: 1px 1px 2px rgb(90, 90, 90);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// justify-content: center;
+@media  (min-width: 768px) and (max-width: 900px){
+  .card{
+    width: 50%;
+  }
+}
