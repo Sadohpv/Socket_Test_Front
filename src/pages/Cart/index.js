@@ -87,7 +87,7 @@ function Cart() {
           </div>
         )}
         {empty == false && product.length == 0 && (
-          <div>Không có sản phẩm nào trong giỏ hàng</div>
+          <div  className={cx("empty")}>Không có sản phẩm nào trong giỏ hàng</div>
         )}
         {sum > 0 && (
           <div className={cx("clear")} onClick={handleClear}>
