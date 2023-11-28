@@ -14,9 +14,14 @@ function handleAddCartService(data){
   return axios.post("/addToCart", { data: data });
 
 }
+function handleClearCartService(){
+  return axios.get("/clear");
+};
+
 export default {
   handleGetDataService,
   handleGetCartService,
   handleSearchService,
-  handleAddCartService
+  handleAddCartService,
+  handleClearCartService
 };

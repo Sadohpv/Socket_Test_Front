@@ -41,8 +41,6 @@ function Home() {
   }, [loading]);
   const debounced = useDebounce(key, 500);
   useEffect(() => {
-    
-
     const fetchApi = async () => {
       const results = await userService.handleSearchService(debounced);
       if (results.product.length > 0) {
@@ -92,14 +90,25 @@ function Home() {
             value={key}
             onChange={handleSearch}
             onKeyDown={handleBackSpace}
-            placeholder = {"Nhập mã hoặc tên sản phẩm "}
+            placeholder={"Nhập mã hoặc tên sản phẩm "}
           />
         </div>
-        {product.length > 0 &&
-          product.map((item) => <Card data={item} key={Math.random()} />)}
-        {/* <div className={cx("button")} onClick={handleOnClick}>
-          Click
-        </div> */}
+        <div className={cx("content")}>
+
+       
+        <div className={cx("category")}>
+          <div className={cx("cate_title")}>
+                Thể Loại
+          </div>
+          <div className={cx("cate_item")}>Kryptonite 1</div>
+          <div className={cx("cate_item")}>Kryptonite 2</div>
+          <div className={cx("cate_item")}>Kryptonite 3</div>
+        </div>
+        <div className={cx("product")}>
+          {product.length > 0 &&
+            product.map((item) => <Card data={item} key={Math.random()} />)}
+        </div>
+        </div>
       </div>
     </>
   );

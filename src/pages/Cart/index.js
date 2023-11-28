@@ -17,7 +17,7 @@ function Cart() {
   const [sum, setSum] = useState(0);
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
-
+  const [empty, setEmpty] = useState(true);
   useEffect(() => {
     socketRef.current = socketIOClient.connect(host);
 
@@ -27,7 +27,7 @@ function Cart() {
 
     async function fetch() {
       const res = await userService.handleGetCartService();
-      // console.log(res);
+      console.log(res);
       if ((res !== undefined) & (res.EC === 0)) {
         console.log("Here");
         setProduct(res.product);
@@ -36,6 +36,8 @@ function Cart() {
           price_sum = price_sum + item.quantity * item.Product.price;
         });
         setSum(price_sum);
+        setEmpty(false);
+      } else {
       }
     }
     fetch();
@@ -47,32 +49,32 @@ function Cart() {
     const res = await userService.handleAddCartService(data);
     if ((res !== undefined) & (res.EC === 0 || res.EC === 2)) {
       setLoading(!loading);
-      toast.success(
-        res.message,
-        {
-          position: toast.POSITION.TOP_RIGHT,
-        }
-      );
-    }else{
-      toast.error(
-        res.message,
-        {
-          position: toast.POSITION.TOP_RIGHT,
-        }
-      );
+      toast.success(res.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else {
+      toast.error(res.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     }
   };
-
+  const handleClear = async () => {
+    const res = await userService.handleClearCartService();
+    if (res) {
+      setLoading(!loading);
+    }
+  };
+  // console.log(product);
   return (
     <>
       <div className={cx("wrapper")}>
         <div className={cx("title")}>
-              <div className={cx("stt")}>STT</div>
-              <div className={cx("name")}>Tên</div>
-              <div className={cx("quantity")}> Số Lượng </div>
+          <div className={cx("stt")}>STT</div>
+          <div className={cx("name")}>Tên</div>
+          <div className={cx("quantity")}> Số Lượng </div>
 
-              <div className={cx("price")}>Đơn Giá</div>
-              <div className={cx("sum_title")}>Thành Tiền</div>
+          <div className={cx("price")}>Đơn Giá</div>
+          <div className={cx("sum_title")}>Thành Tiền</div>
         </div>
         {product.length > 0 &&
           product.map((item, index) => (
@@ -84,7 +86,19 @@ function Cart() {
             {sum} VND
           </div>
         )}
-       
+        {empty == false && product.length == 0 && (
+          <div>Không có sản phẩm nào trong giỏ hàng</div>
+        )}
+        {sum > 0 && (
+          <div className={cx("clear")} onClick={handleClear}>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+
+            <div>Thanh Toán</div>
+          </div>
+        )}
       </div>
     </>
   );
