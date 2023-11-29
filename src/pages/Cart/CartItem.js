@@ -27,7 +27,7 @@ function CartItem({ data, index }) {
       <div className={cx("stt")}> {index + 1}</div>
       
         <div className={cx("name")}>{product.name}</div>
-        <div className={cx("quantity")}> {data.quantity}</div>
+        <div className={cx("quantity")}> { data.quantity}</div>
         <div className={cx("price")}> {product.price} VND</div>
         <div className={cx("sum_title")}> {price_sum} VND</div>
       
