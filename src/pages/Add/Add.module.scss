@@ -1,0 +1,211 @@
+.wrapper {
+  position: relative;
+  // background-color: #202020;
+  // background-image: url('https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/620bd6d655f2044afa28bff4_glassmorphism.jpeg');
+  background-image: linear-gradient(
+    to right top,
+    #000000,
+    #0b0b0b,
+    #141414,
+    #1a1a1a,
+    #202020,
+    #252525,
+    #2a2a2b,
+    #2f2f30,
+    #343436,
+    #39393c,
+    #3d3f43,
+    #424449
+  );
+  top: 56px;
+  width: 100%;
+  height: calc(100% - 56px);
+  min-height: 100vh;
+  // min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  overflow: hidden;
+  // justify-content: center;
+  align-items: center;
+  // flex-wrap: wrap;
+  flex-direction: column;
+  background-color: white;
+
+  gap: 30px;
+  .title {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // background-color: white;
+    height: 56px;
+    color: white;
+    font-size: 30px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    margin-bottom: 12px;
+    box-shadow: 2px 2px 3px black;
+  }
+}
+
+.box_input {
+  width: 100%;
+  max-width: 400px;
+  height: 40px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  input {
+    width: 65%;
+    height: 100%;
+    outline: none;
+    font-size: 18px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-color: transparent;
+    box-shadow: 0px 0px 1px 1px rgb(0, 0, 0);
+    padding-left: 8px;
+  }
+  div {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+  }
+}
+.button {
+  width: 120px;
+  height: 40px;
+  background-color: white;
+}
+
+.clear {
+  margin-top: 20px;
+  width: 100px;
+  height: 40px;
+  // background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // border-radius: 12px;
+  font-size: 24px;
+  cursor: pointer;
+  div {
+    line-height: 40px;
+    font-weight: 700;
+    user-select: none;
+  }
+}
+
+.clear {
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  color: #fff;
+
+  font-size: 16px;
+
+  overflow: hidden;
+  transition: 0.25s;
+}
+
+.clear:hover {
+  background: #ffffff;
+  color: black;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff,
+    0 0 10px #ffffff;
+}
+
+.clear span {
+  position: absolute;
+  display: block;
+}
+
+.clear span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffffff);
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+.clear span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #ffffff);
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+
+.clear span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #ffffff);
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+.clear span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #ffffff);
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
+  }
+}
+
+input {
+  &:file-upload-button{
+    display: none;
+  }
+}

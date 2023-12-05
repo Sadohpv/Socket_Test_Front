@@ -4,24 +4,37 @@ import axios from "../services/customAxios";
 function handleGetDataService() {
   return axios.get("/");
 }
+function handleGetDataCateService(cate) {
+  return axios.get(`/cate/${cate}`);
+}
 function handleGetCartService() {
   return axios.get("/cart");
 }
 function handleSearchService(key) {
   return axios.post("/search", { key: key });
 }
-function handleAddCartService(data){
+function handleAddCartService(data) {
   return axios.post("/addToCart", { data: data });
-
 }
-function handleClearCartService(){
+function handleClearCartService() {
   return axios.get("/clear");
-};
-
+}
+function handleAddProductService(id, name, cate, price, quantity,image) {
+  return axios.post("/addProduct", {
+    id: id,
+    name: name,
+    cate: cate,
+    price: price,
+    quantity: quantity,
+    image:image,
+  });
+}
 export default {
   handleGetDataService,
   handleGetCartService,
   handleSearchService,
   handleAddCartService,
-  handleClearCartService
+  handleClearCartService,
+  handleAddProductService,
+  handleGetDataCateService
 };

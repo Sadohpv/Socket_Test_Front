@@ -73,6 +73,16 @@ function Home() {
       setLoading(!loading);
     }
   };
+              
+  const handleGetCate = async(cate)=>{
+    const res = await userService.handleGetDataCateService(cate);
+    // console.log(res);
+    // console.log("Loading Data");
+    if ((res !== undefined) & (res.EC === 0)) {
+      // console.log("Here");
+      setProduct(res.product);
+    }
+  }
   return (
     <>
       <video
@@ -94,20 +104,31 @@ function Home() {
           />
         </div>
         <div className={cx("content")}>
-
-       
-        <div className={cx("category")}>
-          <div className={cx("cate_title")}>
-                Thể Loại
+          <div className={cx("category")}>
+            <div className={cx("cate_title")}>Thể Loại</div>
+            <div
+              className={cx("cate_item")}
+              onClick={() => handleGetCate("Kryotonite 1")}
+            >
+              Kryptonite 1
+            </div>
+            <div
+              className={cx("cate_item")}
+              onClick={() => handleGetCate("Kryotonite 2")}
+            >
+              Kryptonite 2
+            </div>
+            <div
+              className={cx("cate_item")}
+              onClick={() => handleGetCate("Kryotonite 3")}
+            >
+              Kryptonite 3
+            </div>
           </div>
-          <div className={cx("cate_item")}>Kryptonite 1</div>
-          <div className={cx("cate_item")}>Kryptonite 2</div>
-          <div className={cx("cate_item")}>Kryptonite 3</div>
-        </div>
-        <div className={cx("product")}>
-          {product.length > 0 &&
-            product.map((item) => <Card data={item} key={Math.random()} />)}
-        </div>
+          <div className={cx("product")}>
+            {product.length > 0 &&
+              product.map((item) => <Card data={item} key={Math.random()} />)}
+          </div>
         </div>
       </div>
     </>

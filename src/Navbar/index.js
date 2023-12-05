@@ -32,6 +32,16 @@ function Navbar() {
           </div>
         </NavLink>
       </TippyCustom>
+      <TippyCustom content={"Giỏ Hàng"}>
+      <NavLink
+        to="/add"
+        className={(nav) => cx("menu_item", { active: nav.isActive })}
+      >
+        <div className={cx("item")}>
+          <CartIcon width="28px" height="28px" />
+        </div>
+      </NavLink>
+    </TippyCustom>
     </div>
   );
 }
