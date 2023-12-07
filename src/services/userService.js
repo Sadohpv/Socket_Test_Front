@@ -19,15 +19,18 @@ function handleAddCartService(data) {
 function handleClearCartService() {
   return axios.get("/clear");
 }
-function handleAddProductService(id, name, cate, price, quantity,image) {
+function handleAddProductService(id, name, cate, price, quantity, image) {
   return axios.post("/addProduct", {
     id: id,
     name: name,
     cate: cate,
     price: price,
     quantity: quantity,
-    image:image,
+    image: image,
   });
+}
+function handleAddQuanService(quan, id) {
+  return axios.post("/addQuan", { quan: quan, id: id });
 }
 export default {
   handleGetDataService,
@@ -36,5 +39,6 @@ export default {
   handleAddCartService,
   handleClearCartService,
   handleAddProductService,
-  handleGetDataCateService
+  handleGetDataCateService,
+  handleAddQuanService,
 };

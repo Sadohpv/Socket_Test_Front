@@ -127,7 +127,7 @@ function Home() {
           </div>
           <div className={cx("product")}>
             {product.length > 0 &&
-              product.map((item) => <Card data={item} key={Math.random()} />)}
+              product.map((item) => <Card data={item} loading={loading} setLoading={setLoading} key={Math.random()} />)}
           </div>
         </div>
       </div>

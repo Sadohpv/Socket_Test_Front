@@ -18,6 +18,7 @@ function Add() {
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const socketRef = useRef();
 
@@ -63,9 +64,22 @@ function Add() {
 
       reader.onloadend = () => {
         setImage(reader.result);
+        
       };
     }
   };
+  useEffect(()=>{
+    socketRef.current = socketIOClient.connect(host);
+
+    socketRef.current.on("sendDataServer", (data) => {
+      setId(data.text);
+      // setLoading(!loading);
+
+    });
+    return () => {
+      socketRef.current.disconnect();
+    };
+  },[])
   return (
     <>
       <div className={cx("wrapper")}>

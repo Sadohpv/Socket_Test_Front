@@ -1,6 +1,6 @@
 import styles from "./Navbar.module.scss";
 import classNames from "classnames/bind";
-import { CartIcon, HomeIcon } from "../icons";
+import { CartIcon, HistoryIcon, HomeIcon, PlusIcon } from "../icons";
 import TippyCustom from "../Tippy";
 import { NavLink } from "react-router-dom";
 const cx = classNames.bind(styles);
@@ -32,13 +32,23 @@ function Navbar() {
           </div>
         </NavLink>
       </TippyCustom>
-      <TippyCustom content={"Giỏ Hàng"}>
+      <TippyCustom content={"Thêm Sản Phẩm"}>
       <NavLink
         to="/add"
         className={(nav) => cx("menu_item", { active: nav.isActive })}
       >
         <div className={cx("item")}>
-          <CartIcon width="28px" height="28px" />
+          <PlusIcon width="26px" height="26px" />
+        </div>
+      </NavLink>
+    </TippyCustom>
+    <TippyCustom content={"Lịch sử bán hàng"}>
+      <NavLink
+        to="/history"
+        className={(nav) => cx("menu_item", { active: nav.isActive })}
+      >
+        <div className={cx("item")}>
+          <HistoryIcon width="26px" height="26px" />
         </div>
       </NavLink>
     </TippyCustom>
