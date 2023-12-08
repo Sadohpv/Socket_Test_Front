@@ -45,6 +45,8 @@
     overflow: hidden;
     object-fit: cover;
     background-color: white;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
 
     img {
       width: 100%;
@@ -62,7 +64,7 @@
     color: white;
     text-shadow: 1px 1px 2px #000000;
     font-weight: 700;
-
+    position: relative;
     .name {
       color: white;
       font-size: 20px;
@@ -79,16 +81,32 @@
       }
     }
     .each {
+      width: 100%;
       display: flex;
       font-size: 16px;
 
       align-items: center;
       justify-content: flex-start;
       text-align: start;
-
+      position: relative;
       margin-top: 8px;
       span {
         margin-left: 10px;
+        display: inline-block;
+      }
+      &::before {
+        content: "";
+        width: 100%;
+        position: absolute;
+        height: 1px;
+        background-color: #d9d9d9;
+        bottom: -5px;
+      }
+      .sale {
+        text-decoration: line-through;
+        font-size: medium;
+        // font-weight: 500;
+        color: #dedede;
       }
     }
     .long {
@@ -100,8 +118,9 @@
   }
 }
 .button {
-  margin-top: 80px;
-  width: 100%;
+  bottom: 10px;
+  position: absolute;
+  width: 160px;
   height: 40px;
   border-radius: 8px;
   background-color: rgb(95, 225, 186);
@@ -156,8 +175,8 @@
 .tab {
   position: absolute;
   width: 50px;
-  height: 100px;
-  // background-color:red;
+  height: 150px;
+  // backgrond-color:red;
   top: 20px;
   right: -50px;
   display: flex;
@@ -179,5 +198,39 @@
     &:hover {
       background: rgba(255, 255, 255, 0.7);
     }
+  }
+}
+.sale_box {
+  position: absolute;
+
+  // background-color:red;
+  left: 20px;
+  // border-bottom: 100%;
+  box-sizing: border-box;
+  //  height: 0;
+  // border-top: 0px solid yellow;
+  // border-bottom: 23px solid transparent;
+  // border-right: 23px solid yellow;
+  // border-left: 23px  solid yellow;
+  width: 32px;
+  height: 32px;
+  background-color: yellow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &::after {
+    content: "";
+    position: absolute;
+   
+    border-top: 0px solid yellow;
+    border-bottom: 16px solid transparent;
+    border-right: 16px solid yellow;
+    border-left: 16px solid yellow;
+    bottom: -16px;
+    left: 0px;
+  }
+  span{
+    font-size: 14px;
+    color: red;
   }
 }

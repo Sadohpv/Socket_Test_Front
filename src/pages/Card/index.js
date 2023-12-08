@@ -3,21 +3,22 @@ import classNames from "classnames/bind";
 import images from "../../test";
 import userService from "../../services/userService";
 import { toast } from "react-toastify";
-import { useState } from "react";
-import { CancelIcon, SettingIcon } from "../../icons";
+import { useEffect, useState } from "react";
+import { CancelIcon, SaleIcon, SettingIcon } from "../../icons";
 
 const cx = classNames.bind(styles);
 
-function Card({ data,setLoading,loading }) {
+function Card({ data, setLoading, loading }) {
   // console.log(data);
   const [quan, setQuan] = useState("");
   const [addTab, setAddTab] = useState(false);
-
+  const [sold, setSold] = useState(0);
   const [tab, setTab] = useState(false);
+  const [saleTab, setSaleTab] = useState(false);
+  const [sale, setSale] = useState("");
   const handleAddToCart = async () => {
     const res = await userService.handleAddCartService(data.slug);
     if ((res !== undefined) & (res.EC === 0 || res.EC === 2)) {
-
       toast.success(res.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
@@ -29,13 +30,13 @@ function Card({ data,setLoading,loading }) {
   };
   const handleAddQuan = async () => {
     if (quan != "") {
-      const res = await userService.handleAddQuanService(quan,data.slug);
-      if(res && res.EC==0){
+      const res = await userService.handleAddQuanService(quan, data.slug);
+      if (res && res.EC == 0) {
         setLoading(!loading);
         toast.success(res.message, {
           position: toast.POSITION.TOP_RIGHT,
         });
-      }else {
+      } else {
         toast.error(res.message, {
           position: toast.POSITION.TOP_RIGHT,
         });
@@ -45,7 +46,33 @@ function Card({ data,setLoading,loading }) {
       alert("Here");
     }
   };
-  // console.log(quan);
+  const handleAddSale = async () => {
+    if (sale != "") {
+      const res = await userService.handleAddSaleService(sale, data.slug);
+      if (res && res.EC == 0) {
+        setLoading(!loading);
+        toast.success(res.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      } else {
+        toast.error(res.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
+      setSale("");
+    } else {
+      alert("Here");
+    }
+  };
+  useEffect(() => {
+    async function fetch() {
+      const res = await userService.handleSoldCountService(data.id);
+      if (res && res.count) {
+        setSold(res.count);
+      }
+    }
+    fetch();
+  }, []);
   return (
     <div
       className={cx("card", data.quantity <= 0 && "fil")}
@@ -53,6 +80,7 @@ function Card({ data,setLoading,loading }) {
       onMouseLeave={() => {
         setTab(false);
         setAddTab(false);
+        setSaleTab(false);
       }}
     >
       <div className={cx("pic")}>
@@ -63,13 +91,24 @@ function Card({ data,setLoading,loading }) {
           <span>{data.name}</span>
         </div>
         <div className={cx("each", "long")}>
-          Thể loại : <span>{data.catelogy}</span>
+          <span>Thể loại :</span>
+          <span>{data.catelogy}</span>
         </div>
         <div className={cx("each", "long")}>
-          Giá : <span> {data.price} VND</span>
+          <span>Giá :</span>
+
+          <span className={cx(data.sale > 0 && "sale")}> {data.price} VND</span>
+          {data.sale > 0 && (
+            <span>{(data.price * (100 - data.sale)) / 100} VND</span>
+          )}
         </div>
         <div className={cx("each")}>
-          Số lượng : <span> {data.quantity > 0 ? data.quantity : 0}</span>
+          <span>Số lượng :</span>
+          <span> {data.quantity > 0 ? data.quantity : 0}</span>
+        </div>
+        <div className={cx("each")}>
+          <span>Đã bán :</span>
+          <span>{sold}</span>
         </div>
         <div className={cx("button")} onClick={handleAddToCart}>
           <span>Thêm Vào Giỏ</span>
@@ -82,8 +121,23 @@ function Card({ data,setLoading,loading }) {
       )}
       {tab && (
         <div className={cx("tab")}>
-          <div className={cx("tab_child")} onClick={(e) => setAddTab(!addTab)}>
+          <div
+            className={cx("tab_child")}
+            onClick={(e) => {
+              setAddTab(!addTab);
+              setSaleTab(false);
+            }}
+          >
             <SettingIcon width="22px" height="22px" />
+          </div>
+          <div
+            className={cx("tab_child")}
+            onClick={(e) => {
+              setSaleTab(!saleTab);
+              setAddTab(false);
+            }}
+          >
+            <SaleIcon width="22px" height="22px" />
           </div>
           <div className={cx("tab_child")}>
             <CancelIcon width="22px" height="22px" />
@@ -103,6 +157,26 @@ function Card({ data,setLoading,loading }) {
             Tăng số lượng
           </div>
         </>
+      )}
+      {tab && saleTab && (
+        <>
+          <input
+            value={sale}
+            onChange={(e) => setSale(e.target.value)}
+            type="number"
+            min={0}
+            max={100}
+            placeholder="Giảm giá %"
+          />
+          <div className={cx("add_quantity")} onClick={handleAddSale}>
+            Khuyến mãi
+          </div>
+        </>
+      )}
+      {data.sale > 0 && (
+        <div className={cx("sale_box")}>
+          <span>{data.sale}%</span>
+        </div>
       )}
     </div>
   );

@@ -8,6 +8,7 @@ import { io } from "socket.io-client";
 import userService from "../../services/userService";
 import useDebounce from "./useDebounce";
 import { toast } from "react-toastify";
+import Footer from "../../Footer";
 
 const cx = classNames.bind(styles);
 const host = "http://localhost:5577";
@@ -73,8 +74,8 @@ function Home() {
       setLoading(!loading);
     }
   };
-              
-  const handleGetCate = async(cate)=>{
+
+  const handleGetCate = async (cate) => {
     const res = await userService.handleGetDataCateService(cate);
     // console.log(res);
     // console.log("Loading Data");
@@ -85,14 +86,14 @@ function Home() {
   }
   return (
     <>
-      <video
+      {/* <video
         className={cx("video")}
         src={images.back2}
         autoPlay
         muted
         loop
         disablePictureInPicture={true}
-      />
+      /> */}
 
       <div className={cx("wrapper")}>
         <div className={cx("search")}>
@@ -108,29 +109,35 @@ function Home() {
             <div className={cx("cate_title")}>Thể Loại</div>
             <div
               className={cx("cate_item")}
-              onClick={() => handleGetCate("Kryotonite 1")}
+              onClick={() => handleGetCate("Cà Phê")} // Sửa thể loại
             >
-              Kryptonite 1
+              Cà Phê
             </div>
             <div
               className={cx("cate_item")}
-              onClick={() => handleGetCate("Kryotonite 2")}
-            >
-              Kryptonite 2
+              onClick={() => handleGetCate("Bánh Ngọt")}>
+                Bánh Ngọt
             </div>
-            <div
-              className={cx("cate_item")}
-              onClick={() => handleGetCate("Kryotonite 3")}
-            >
-              Kryptonite 3
-            </div>
+          <div
+            className={cx("cate_item")}
+            onClick={() => handleGetCate("Thạch Rau Câu")}
+          >
+            Thạch Rau Câu
           </div>
-          <div className={cx("product")}>
-            {product.length > 0 &&
-              product.map((item) => <Card data={item} loading={loading} setLoading={setLoading} key={Math.random()} />)}
+          <div
+            className={cx("cate_item")}
+            onClick={() => handleGetCate("Sinh Tố")}
+          >
+            Sinh Tố
           </div>
         </div>
+        <div className={cx("product")}>
+          {product.length > 0 &&
+            product.map((item) => <Card data={item} loading={loading} setLoading={setLoading} key={Math.random()} />)}
+        </div>
       </div>
+      <Footer />
+    </div >
     </>
   );
 }

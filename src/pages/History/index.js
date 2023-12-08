@@ -1,4 +1,4 @@
-import styles from "./Cart.module.scss";
+import styles from "./History.module.scss";
 import classNames from "classnames/bind";
 import images from "../../test";
 import Card from "../Card";
@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 
 const cx = classNames.bind(styles);
 const host = "http://localhost:5577";
-function Cart() {
+function History() {
   const socketRef = useRef();
   const [product, setProduct] = useState([]);
   const [sum, setSum] = useState(0);
@@ -26,7 +26,7 @@ function Cart() {
     });
 
     async function fetch() {
-      const res = await userService.handleGetCartService();
+      const res = await userService.handleGetHistoryService();
       console.log(res);
       if ((res !== undefined) & (res.EC === 0)) {
         console.log("Here");
@@ -46,9 +46,7 @@ function Cart() {
     };
   }, [loading]);
   const handleAddCart = async (data) => {
-    // console.log("Here");
     const res = await userService.handleAddCartService(data);
-    console.log(res);
     if ((res !== undefined) & (res.EC === 0 || res.EC === 2)) {
       setLoading(!loading);
       toast.success(res.message, {
@@ -66,7 +64,7 @@ function Cart() {
       setLoading(!loading);
     }
   };
-  // console.log(product);
+  console.log(product);
   return (
     <>
       <div className={cx("wrapper")}>
@@ -77,33 +75,18 @@ function Cart() {
 
           <div className={cx("price")}>Đơn Giá</div>
           <div className={cx("sum_title")}>Thành Tiền</div>
+          <div className={cx("sum_title")}>Ngày Bán</div>
+
         </div>
         {product.length > 0 &&
           product.map((item, index) => (
             <CartItem data={item} key={Math.random()} index={index} />
           ))}
-        {product.length > 0 && (
-          <div className={cx("sum")}>
-            <span> Tổng Tiền </span>
-            {sum} VND
-          </div>
-        )}
-        {empty == false && product.length == 0 && (
-          <div  className={cx("empty")}>Không có sản phẩm nào trong giỏ hàng</div>
-        )}
-        {sum > 0 && (
-          <div className={cx("clear")} onClick={handleClear}>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-
-            <div>Thanh Toán</div>
-          </div>
-        )}
+       
+       
       </div>
     </>
   );
 }
 
-export default Cart;
+export default History;

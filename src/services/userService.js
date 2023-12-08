@@ -32,6 +32,18 @@ function handleAddProductService(id, name, cate, price, quantity, image) {
 function handleAddQuanService(quan, id) {
   return axios.post("/addQuan", { quan: quan, id: id });
 }
+function handleAddSaleService(sale,id){
+  return axios.post("/addSale", { sale: sale, id: id });
+
+}
+function handleGetHistoryService(){
+  return axios.get("/history");
+
+}
+function handleSoldCountService(slug){
+  return axios.get(`/countSold/${slug}`);
+
+}
 export default {
   handleGetDataService,
   handleGetCartService,
@@ -41,4 +53,7 @@ export default {
   handleAddProductService,
   handleGetDataCateService,
   handleAddQuanService,
+  handleGetHistoryService,
+  handleSoldCountService,
+  handleAddSaleService
 };

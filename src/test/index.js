@@ -8,7 +8,7 @@ const images = {
     back2: require('./2.mp4'),
     soldout: require('./soldout.png'),
 
-    // logo: require('./logo.jpg'),
+    logo: require('./logo.png'),
 }
 
 export default images;
